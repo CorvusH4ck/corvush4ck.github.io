@@ -1,7 +1,8 @@
 ---
 title: APK Decompilers
 date: 2024-11-21
-tags: ['pentest mobile', 'android']
+category: ['pentest mobile', 'android']
+tags: ['decompilers']
 summary: Técnicas de De-ofuscación Manual
 ---
 

@@ -16,13 +16,13 @@
  * beian {string} Chinese policy
  */
 export const site = {
-  title: 'Astro Theme Yi', // required
+  title: 'Corvus DDoSKrom', // required
   favicon: '/favicon.svg', // required
   description: 'Welcome to my independent blog website! ',
-  author: "Astro-Yi", // required
-  avatar: '/avatar.png', // required
+  author: "Rafael Morinigo", // required
+  avatar: '/logo.png', // required
   url: 'https://xxxxxx.com', // required
-  motto: 'Actions speak louder than words.',
+  motto: 'Pentester | Red Team | EHE | NDE | CTF Player',
   recentBlogSize: 5,
   archivePageSize: 25,
   postPageSize: 10,
@@ -75,7 +75,7 @@ export const categories = [
   //   href: "/memos",
   // },
   {
-    name: "Archive",
+    name: "Archivo",
     iconClass: "ri-archive-line",
     href: "/archive/1",
   },
@@ -85,7 +85,7 @@ export const categories = [
     href: "/message",
   },
   {
-    name: "Search",
+    name: "Buscar",
     iconClass: "ri-search-line",
     href: "/search",
   },
@@ -95,7 +95,7 @@ export const categories = [
     href: "javascript:void(0);",
     children: [
       {
-        name: 'About',
+        name: 'Acerca de',
         iconClass: 'ri-information-line',
         href: '/about',
       },
@@ -124,18 +124,13 @@ export const infoLinks = [
     outlink: 'xxxxxxx',
   },
   {
-    icon: 'ri-instagram-fill',
-    name: 'instagram',
-    outlink: 'xxxxxxx',
-  },
-  {
     icon: 'ri-github-fill',
     name: 'github',
     outlink: 'xxxxxxx',
   },
   {
-    icon: 'ri-rss-fill',
-    name: 'rss',
+    icon: 'ri-linkedin-fill',
+    name: 'linkedin',
     outlink: 'xxxxxxx',
   }
 ]

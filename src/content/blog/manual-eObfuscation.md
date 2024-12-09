@@ -1,7 +1,8 @@
 ---
 title: De-ofuscación manual
 date: 2024-11-20
-tags: ['pentest mobile', 'android']
+category: ['pentest mobile', 'android']
+tags: ['de-ofuscación']
 summary: Técnicas de De-ofuscación Manual
 ---
 

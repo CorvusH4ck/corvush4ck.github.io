@@ -1,7 +1,8 @@
 ---
 title: ADB y Comandos ADB
 date: 2024-11-19
-tags: ['pentest mobile', 'android', 'adb', 'comando']
+category: ['pentest mobile', 'android']
+tags: ['adb', 'comando']
 summary: ADB (Android Debug Bridge)
 ---
 

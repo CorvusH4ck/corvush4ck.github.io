@@ -1,7 +1,8 @@
 ---
 title: Android Task Hijacking
 date: 2024-11-19
-tags: ['pentest mobile', 'android']
+category: ['pentest mobile']
+tags: ['android']
 summary: Tarea, Pila de Fondo y Actividades en Primer Plano
 ---
 
