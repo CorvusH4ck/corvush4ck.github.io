@@ -79,7 +79,7 @@ export const categories = [
     iconClass: "ri-search-line",
     href: "/search",
   },
-  {
+  /* {
     name: "More",
     iconClass: "ri-more-fill",
     href: "javascript:void(0);",
@@ -96,7 +96,7 @@ export const categories = [
         target: '_self',
       },
     ]
-  }
+   }*/
 ]
 
 /**
