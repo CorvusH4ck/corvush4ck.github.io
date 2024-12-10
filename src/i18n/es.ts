@@ -41,8 +41,8 @@ export  const es = {
   'sidebar.recentArticle': 'Post Recientes',
   'sidebar.recentComments': 'Comentarios Recientes',
   'sidebar.tags': 'Etiquetas',
-  'sidebar.uncategorized': 'uncategorized',
+  'sidebar.uncategorized': 'sin categoría',
   'title.draft': 'draft',
-  'title.minutes':' Minutes',
+  'title.minutes':' Minutos',
   'title.words':' Words'
 }
