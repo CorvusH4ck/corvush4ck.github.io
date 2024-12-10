@@ -12,7 +12,6 @@ export function formatDate(date,dateType='post.dateFormat') {
   if (date) {
     const dateFormat = t(dateType) || "DD-MM-YYYY";
     return dayjs(date).utc().format(dateFormat);
-  } else {
-    return ''
   }
+    return ''
 }
