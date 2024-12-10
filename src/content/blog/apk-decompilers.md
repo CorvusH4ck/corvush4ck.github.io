@@ -30,7 +30,7 @@ Enjarify genera, como sugiere su nombre, un archivo JAR. A partir de ahí, se pu
 
 Para resumir, la siguiente figura ilustra ambas opciones que tenemos.
 
-![APK](/static/images/decompilation.min.svg)
+![APK](/decompilation.min.svg)
 
 
 # Decompiladores
@@ -39,69 +39,97 @@ Para resumir, la siguiente figura ilustra ambas opciones que tenemos.
 
 CFR es capaz de decompilar características modernas de Java. Úsalo de la siguiente manera:
 
-Para decompilación estándar: java -jar ./cfr.jar "app.jar" --outputdir "directorio_salida"
+Para decompilación estándar:
 
-Para archivos JAR grandes, ajusta la asignación de memoria de la JVM: java -Xmx4G -jar ./cfr.jar "app.jar" --outputdir "directorio_salida"
+```bash
+java -jar ./cfr.jar "app.jar" --outputdir "directorio_salida"
+```
 
+Para archivos JAR grandes, ajusta la asignación de memoria de la JVM:
 
+```bash
+java -Xmx4G -jar ./cfr.jar "app.jar" --outputdir "directorio_salida"
+```
 
+# Fernflower
 
-
-
-
-
-
-
-
-
-
-
-Para más detalles sobre cada herramienta, consulta la publicación original de https://eiken.dev/blog/2021/02/how-to-break-your-jar-in-2021-decompilation-guide-for-jars-and-apks/#cfr
-
-JD-Gui
-Como el decompilador GUI Java pionero, JD-Gui te permite investigar el código Java dentro de archivos APK. Es fácil de usar; después de obtener el APK, simplemente ábrelo con JD-Gui para inspeccionar el código.
-
-Jadx
-Jadx ofrece una interfaz fácil de usar para decompilar código Java de aplicaciones Android. Se recomienda por su facilidad de uso en diferentes plataformas.
-
-Para lanzar la GUI, navega al directorio bin y ejecuta: jadx-gui
-
-Para uso en línea de comandos, decompila un APK con: jadx app.apk
-
-Para especificar un directorio de salida o ajustar opciones de decompilación: `jadx app.apk -d <ruta al directorio de salida> --no-res --no-src --no-imports`
-
-GDA-android-reversing-Tool
-GDA, una herramienta solo para Windows, ofrece amplias características para la ingeniería inversa de aplicaciones Android. Instala y ejecuta GDA en tu sistema Windows, luego carga el archivo APK para análisis.
-
-Bytecode-Viewer
-Con Bytecode-Viewer, puedes analizar archivos APK utilizando múltiples decompiladores. Después de descargar, ejecuta Bytecode-Viewer, carga tu APK y selecciona los decompiladores que deseas usar para un análisis simultáneo.
-
-Enjarify
-Enjarify traduce bytecode Dalvik a bytecode Java, permitiendo que las herramientas de análisis de Java analicen aplicaciones Android de manera más efectiva.
-
-Para usar Enjarify, ejecuta: enjarify app.apk Esto genera el bytecode Java equivalente del APK proporcionado.
-
-CFR
-CFR es capaz de decompilar características modernas de Java. Úsalo de la siguiente manera:
-
-Para decompilación estándar: java -jar ./cfr.jar "app.jar" --outputdir "directorio_salida"
-
-Para archivos JAR grandes, ajusta la asignación de memoria de la JVM: java -Xmx4G -jar ./cfr.jar "app.jar" --outputdir "directorio_salida"
-
-Fernflower
 Fernflower, un decompilador analítico, requiere ser construido desde el código fuente. Después de construir:
 
-Decompila un archivo JAR: java -jar ./fernflower.jar "app.jar" "directorio_salida" Luego, extrae los archivos .java del JAR generado usando unzip.
+Decompila un archivo JAR:
 
-Krakatau
+```bash
+java -jar ./fernflower.jar "app.jar" "directorio_salida" 
+```
+
+Luego, extrae los archivos .java del JAR generado usando unzip.
+
+# Krakatau
+
 Krakatau ofrece un control detallado sobre la decompilación, especialmente para manejar bibliotecas externas.
 
-Usa Krakatau especificando la ruta de la biblioteca estándar y el archivo JAR a decompilar: ./Krakatau/decompile.py -out "directorio_salida" -skip -nauto -path "./jrt-extractor/rt.jar" "app.jar"
+Usa Krakatau especificando la ruta de la biblioteca estándar y el archivo JAR a decompilar:
 
-procyon
+```bash
+./Krakatau/decompile.py -out "directorio_salida" -skip -nauto -path "./jrt-extractor/rt.jar" "app.jar"
+```
+
+# Procyon
 Para una decompilación sencilla con procyon:
 
-Decompila un archivo JAR a un directorio especificado: procyon -jar "app.jar" -o "directorio_salida"
+Decompila un archivo JAR a un directorio especificado:
 
-frida-DEXdump
+```bash
+procyon -jar "app.jar" -o "directorio_salida"
+```
+
+# Frida-DEXdump
+
 Esta herramienta se puede usar para volcar el DEX de un APK en ejecución en memoria. Esto ayuda a superar la ofuscación estática que se elimina mientras la aplicación se ejecuta en memoria.
+
+# JD-Gui
+
+Como el decompilador GUI Java pionero, JD-Gui te permite investigar el código Java dentro de archivos APK. Es fácil de usar; después de obtener el APK, simplemente ábrelo con JD-Gui para inspeccionar el código.
+
+# Jadx
+
+Jadx ofrece una interfaz fácil de usar para decompilar código Java de aplicaciones Android. Se recomienda por su facilidad de uso en diferentes plataformas.
+
+Para lanzar la GUI, navega al directorio bin y ejecuta: 
+
+```bash
+jadx-gui
+```
+
+Para uso en línea de comandos, decompila un APK con:
+
+```
+jadx app.apk
+```
+
+Para especificar un directorio de salida o ajustar opciones de decompilación: 
+
+```bash
+jadx app.apk -d <ruta al directorio de salida> --no-res --no-src --no-imports
+```
+
+# GDA-android-reversing-Tool
+
+GDA, una herramienta solo para Windows, ofrece amplias características para la ingeniería inversa de aplicaciones Android. Instala y ejecuta GDA en tu sistema Windows, luego carga el archivo APK para análisis.
+
+# Bytecode-Viewer
+
+Con Bytecode-Viewer, puedes analizar archivos APK utilizando múltiples decompiladores. Después de descargar, ejecuta Bytecode-Viewer, carga tu APK y selecciona los decompiladores que deseas usar para un análisis simultáneo.
+
+# Enjarify
+
+Enjarify traduce bytecode Dalvik a bytecode Java, permitiendo que las herramientas de análisis de Java analicen aplicaciones Android de manera más efectiva.
+
+Para usar Enjarify, ejecuta: 
+
+```bash
+enjarify app.apk      #Esto genera el bytecode Java equivalente del APK proporcionado.
+```
+
+# Referencia
+
+- https://eiken.dev/blog/2021/02/how-to-break-your-jar-in-2021-decompilation-guide-for-jars-and-apks/#cfr
