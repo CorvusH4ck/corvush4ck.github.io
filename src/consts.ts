@@ -17,11 +17,11 @@
  */
 export const site = {
   title: 'Corvus DDoSKrom', // required
-  favicon: '/favicon.svg', // required
-  description: 'Welcome to my independent blog website! ',
+  favicon: '/logo.png', // required
+  description: '¡Bienvenido a mi Blog! ',
   author: "Rafael Morinigo", // required
   avatar: '/logo.png', // required
-  url: 'https://xxxxxx.com', // required
+  url: 'https://corvush4ck.com.com', // required
   motto: 'Pentester | Red Team | EHE | NDE | CTF Player',
   recentBlogSize: 5,
   archivePageSize: 25,
@@ -64,11 +64,6 @@ export const categories = [
     iconClass: "ri-draft-line",
     href: "/blog/1",
   },
-  {
-    name: "Feed",
-    iconClass: "ri-lightbulb-flash-line",
-    href: "/feed/1",
-  },
   // {
   //   name: "Memos",
   //   iconClass: "ri-quill-pen-line",
@@ -78,11 +73,6 @@ export const categories = [
     name: "Archivo",
     iconClass: "ri-archive-line",
     href: "/archive/1",
-  },
-  {
-    name: "Message",
-    iconClass: "ri-chat-1-line",
-    href: "/message",
   },
   {
     name: "Buscar",
@@ -114,24 +104,19 @@ export const categories = [
  */
 export const infoLinks = [
   {
-    icon: 'ri-telegram-fill',
-    name: 'telegram',
-    outlink: 'xxxxxxx',
-  },
-  {
     icon: 'ri-twitter-fill',
     name: 'twitter',
-    outlink: 'xxxxxxx',
+    outlink: 'https://x.com/corvus_ddoskrom',
   },
   {
     icon: 'ri-github-fill',
     name: 'github',
-    outlink: 'xxxxxxx',
+    outlink: 'https://github.com/CorvusH4ck',
   },
   {
     icon: 'ri-linkedin-fill',
     name: 'linkedin',
-    outlink: 'xxxxxxx',
+    outlink: 'https://www.linkedin.com/in/rafael-morinigo-1637491bb/',
   }
 ]
 
