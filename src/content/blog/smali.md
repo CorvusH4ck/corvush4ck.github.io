@@ -1,6 +1,6 @@
 ---
 title: Smali - Descompilar/[Modificar]/Compilar
-date: 2024-11-27
+date: 2024-11-28
 category: ['pentest mobile', 'android']
 tags: []
 summary: Smali - Descompilar/[Modificar]/Compilar
