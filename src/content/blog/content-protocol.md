@@ -1,6 +1,6 @@
 ---
 title: content:// protocol
-date: 2024-11-23
+date: 2024-11-25
 category: ['pentest mobile', 'android']
 tags: []
 summary: content:// protocol
