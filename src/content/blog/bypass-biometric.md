@@ -1,6 +1,6 @@
 ---
 title: Bypass Biometric Authentication
-date: 2024-11-20
+date: 2024-11-26
 category: ['pentest mobile', 'android']
 tags: []
 summary: Bypass Biometric Authentication
