@@ -6,161 +6,126 @@ tags: ['app']
 summary: Android Application Basics
 ---
 
-Modelo de Seguridad de Android
-Hay dos capas:
+# Modelo de Seguridad de Android
 
-El SO, que mantiene las aplicaciones instaladas aisladas entre sí.
+## Hay dos capas:
 
-La aplicación en sí, que permite a los desarrolladores exponer ciertas funcionalidades y configura las capacidades de la aplicación.
+- El **SO**, que mantiene las aplicaciones instaladas aisladas entre sí.
 
-Separación de UID
-A cada aplicación se le asigna un ID de usuario específico. Esto se hace durante la instalación de la aplicación para que la aplicación solo pueda interactuar con archivos propiedad de su ID de usuario o archivos compartidos. Por lo tanto, solo la propia aplicación, ciertos componentes del SO y el usuario root pueden acceder a los datos de la aplicación.
+- La **aplicación en sí**, que permite a los desarrolladores **exponer ciertas funcionalidades** y configura las capacidades de la aplicación.
 
-Compartición de UID
-Dos aplicaciones pueden configurarse para usar el mismo UID. Esto puede ser útil para compartir información, pero si una de ellas se ve comprometida, los datos de ambas aplicaciones se verán comprometidos. Por esta razón, este comportamiento es desaconsejado.
-Para compartir el mismo UID, las aplicaciones deben definir el mismo valor 
-android:sharedUserId
- en sus manifiestos.
+# Separación de UID
 
-Sandbox
-El Sandbox de Aplicaciones Android permite ejecutar cada aplicación como un proceso separado bajo un ID de usuario separado. Cada proceso tiene su propia máquina virtual, por lo que el código de una aplicación se ejecuta en aislamiento de otras aplicaciones.
-Desde Android 5.0(L), se aplica SELinux. Básicamente, SELinux deniega todas las interacciones de procesos y luego crea políticas para permitir solo las interacciones esperadas entre ellos.
+**A cada aplicación se le asigna un ID de usuario específico.** Esto se hace durante la instalación de la aplicación para que **la aplicación solo pueda interactuar con archivos propiedad de su ID de usuario o archivos compartidos.** Por lo tanto, solo la propia aplicación, ciertos componentes del SO y el usuario root pueden acceder a los datos de la aplicación.
 
-Permisos
-Cuando instalas una aplicación y solicita permisos, la aplicación está pidiendo los permisos configurados en los elementos 
-uses-permission
- en el archivo AndroidManifest.xml. El elemento uses-permission indica el nombre del permiso solicitado dentro del atributo name. También tiene el atributo maxSdkVersion que detiene la solicitud de permisos en versiones superiores a la especificada.
-Ten en cuenta que las aplicaciones de Android no necesitan pedir todos los permisos al principio, también pueden solicitar permisos dinámicamente, pero todos los permisos deben ser declarados en el manifiesto.
+# Compartición de UID
 
-Cuando una aplicación expone funcionalidad, puede limitar el acceso solo a aplicaciones que tengan un permiso específico.
+**Dos aplicaciones pueden configurarse para usar el mismo UID.** Esto puede ser útil para compartir información, pero si una de ellas se ve comprometida, los datos de ambas aplicaciones se verán comprometidos. Por esta razón, este comportamiento es **desaconsejado**.
+**Para compartir el mismo UID, las aplicaciones deben definir el mismo valor** `android:sharedUserId` **en sus manifiestos.**
+
+# Sandbox
+
+El **Sandbox de Aplicaciones Android** permite ejecutar **cada aplicación** como un **proceso separado bajo un ID de usuario separado**. Cada proceso tiene su propia máquina virtual, por lo que el código de una aplicación se ejecuta en aislamiento de otras aplicaciones.
+Desde Android 5.0(L), se aplica **SELinux**. Básicamente, SELinux deniega todas las interacciones de procesos y luego crea políticas para **permitir solo las interacciones esperadas entre ellos.**
+
+# Permisos
+
+Cuando instalas una **aplicación y solicita permisos**, la aplicación está pidiendo los permisos configurados en los elementos `uses-permission` en el archivo **AndroidManifest.xml**. El elemento uses-permission indica el nombre del permiso solicitado dentro del **atributo name**. También tiene el atributo maxSdkVersion que detiene la solicitud de permisos en versiones superiores a la especificada.
+Ten en cuenta que las aplicaciones de Android no necesitan pedir todos los permisos al principio, también pueden **solicitar permisos dinámicamente**, pero todos los permisos deben ser **declarados** en el **manifiesto**.
+
+Cuando una aplicación expone funcionalidad, puede limitar el **acceso solo a aplicaciones que tengan un permiso específico**.
 Un elemento de permiso tiene tres atributos:
 
-El nombre del permiso
+- El **nombre** del permiso
+- El atributo **permission-group**, que permite agrupar permisos relacionados.
+- El **nivel de protección** que indica cómo se otorgan los permisos. Hay cuatro tipos:
+    - **Normal:** Se utiliza cuando no **hay amenazas conocidas** para la aplicación. No se **requiere la aprobación del usuario**.
+    - **Peligroso:** Indica que el permiso otorga a la aplicación solicitante algún **acceso elevado**. **Se solicita la aprobación de los usuarios**.
+    - **Firma:** Solo **las aplicaciones firmadas por el mismo certificado que el que** exporta el componente pueden recibir permiso. Este es el tipo de protección más fuerte.
+    - **FirmaOSistema:** Solo **las aplicaciones firmadas por el mismo certificado que el que** exporta el componente o **las aplicaciones que se ejecutan con acceso a nivel de sistema** pueden recibir permisos.
 
-El atributo permission-group, que permite agrupar permisos relacionados.
+# Aplicaciones Preinstaladas
 
-El nivel de protección que indica cómo se otorgan los permisos. Hay cuatro tipos:
+Estas aplicaciones generalmente se encuentran en los directorios `/system/app` o `/system/priv-app` y algunas de ellas están **optimizadas** (puede que ni siquiera encuentres el archivo `classes.dex`). Estas aplicaciones valen la pena revisar porque a veces están **ejecutándose con demasiados permisos** (como root).
 
-Normal: Se utiliza cuando no hay amenazas conocidas para la aplicación. No se requiere la aprobación del usuario.
+- Las que se envían con el **AOSP** (Android OpenSource Project) **ROM**
+- Agregadas por el **fabricante** del dispositivo
+- Agregadas por el **proveedor de telefonía móvil** (si se compró a ellos)
 
-Peligroso: Indica que el permiso otorga a la aplicación solicitante algún acceso elevado. Se solicita la aprobación de los usuarios.
+# Rooting
 
-Firma: Solo las aplicaciones firmadas por el mismo certificado que el que exporta el componente pueden recibir permiso. Este es el tipo de protección más fuerte.
+Para obtener acceso root en un dispositivo Android físico, generalmente necesitas **explotar** 1 o 2 **vulnerabilidades** que suelen ser **específicas** para el **dispositivo** y **versión**.
+Una vez que la explotación ha funcionado, generalmente se copia el binario de Linux `su` en una ubicación especificada en la variable de entorno PATH del usuario, como `/system/xbin`.
 
-FirmaOSistema: Solo las aplicaciones firmadas por el mismo certificado que el que exporta el componente o las aplicaciones que se ejecutan con acceso a nivel de sistema pueden recibir permisos.
+Una vez que el binario de su está configurado, se utiliza otra aplicación de Android para interactuar con el binario `su` y **procesar solicitudes de acceso root** como **Superuser** y **SuperSU** (disponible en Google Play Store).
 
-Aplicaciones Preinstaladas
-Estas aplicaciones generalmente se encuentran en los directorios 
-/system/app
- o 
-/system/priv-app
- y algunas de ellas están optimizadas (puede que ni siquiera encuentres el archivo classes.dex). Estas aplicaciones valen la pena revisar porque a veces están ejecutándose con demasiados permisos (como root).
-
-Las que se envían con el AOSP (Android OpenSource Project) ROM
-
-Agregadas por el fabricante del dispositivo
-
-Agregadas por el proveedor de telefonía móvil (si se compró a ellos)
-
-Rooting
-Para obtener acceso root en un dispositivo Android físico, generalmente necesitas explotar 1 o 2 vulnerabilidades que suelen ser específicas para el dispositivo y versión.
-Una vez que la explotación ha funcionado, generalmente se copia el binario de Linux su en una ubicación especificada en la variable de entorno PATH del usuario, como /system/xbin.
-
-Una vez que el binario de su está configurado, se utiliza otra aplicación de Android para interactuar con el binario su y procesar solicitudes de acceso root como Superuser y SuperSU (disponible en Google Play Store).
-
+:::caution
 Ten en cuenta que el proceso de rooting es muy peligroso y puede dañar severamente el dispositivo.
+:::
 
-ROMs
-Es posible reemplazar el SO instalando un firmware personalizado. Haciendo esto, es posible extender la utilidad de un dispositivo antiguo, eludir restricciones de software o acceder al último código de Android.
-OmniROM y LineageOS son dos de los firmwares más populares para usar.
+# ROMs
 
-Ten en cuenta que no siempre es necesario rootear el dispositivo para instalar un firmware personalizado. Algunos fabricantes permiten el desbloqueo de sus bootloaders de manera bien documentada y segura.
+Es posible **reemplazar el SO instalando un firmware personalizado**. Haciendo esto, es posible extender la utilidad de un dispositivo antiguo, eludir restricciones de software o acceder al último código de Android.
+**OmniROM** y **LineageOS** son dos de los firmwares más populares para usar.
 
-Implicaciones
+Ten en cuenta que **no siempre es necesario rootear el dispositivo** para instalar un firmware personalizado. **Algunos fabricantes permiten** el desbloqueo de sus bootloaders de manera bien documentada y segura.
+
+# Implicaciones
+
 Una vez que un dispositivo está rooteado, cualquier aplicación podría solicitar acceso como root. Si una aplicación maliciosa lo obtiene, tendrá acceso a casi todo y podrá dañar el teléfono.
 
-Fundamentos de Aplicaciones Android
-El formato de las aplicaciones Android se conoce como formato de archivo APK. Es esencialmente un archivo ZIP (cambiando la extensión del archivo a .zip, se pueden extraer y ver los contenidos).
+# Fundamentos de Aplicaciones Android
 
-Contenidos de APK (No exhaustivo)
+- El formato de las aplicaciones Android se conoce como *formato de archivo APK*. Es esencialmente un **archivo ZIP** (cambiando la extensión del archivo a .zip, se pueden extraer y ver los contenidos).
+- Contenidos de APK (No exhaustivo)
+    - **AndroidManifest.xml**
+    - resources.arsc/strings.xml
+    - resources.arsc: contiene recursos precompilados, como XML binario.
+        - res/xml/files_paths.xml
+    - META-INF/
+        - ¡Aquí es donde se encuentra el Certificado!
+    - **classes.dex**
+        - Contiene bytecode Dalvik, que representa el código Java (o Kotlin) compilado que la aplicación ejecuta por defecto.
+    - lib/
+        - Alberga bibliotecas nativas, segregadas por arquitectura de CPU en subdirectorios.
+            - armeabi: código para procesadores basados en ARM
+            - armeabi-v7a: código para procesadores ARMv7 y superiores
+            - x86: código para procesadores X86
+            - mips: código solo para procesadores MIPS
+    - assets/
+        - Almacena archivos diversos necesarios para la aplicación, que pueden incluir bibliotecas nativas adicionales o archivos DEX, a veces utilizados por autores de malware para ocultar código adicional.
+    - res/
+        - Contiene recursos que no están compilados en resources.arsc
 
-AndroidManifest.xml
+# Dalvik y Smali
 
-resources.arsc/strings.xml
+En el desarrollo de Android, se utiliza **Java o Kotlin** para crear aplicaciones. En lugar de usar la JVM como en las aplicaciones de escritorio, Android compila este código en **bytecode ejecutable Dalvik (DEX)**. Anteriormente, la máquina virtual Dalvik manejaba este bytecode, pero ahora, el Android Runtime (ART) se encarga en las versiones más nuevas de Android.
 
-resources.arsc: contiene recursos precompilados, como XML binario.
+Para la ingeniería inversa, **Smali** se vuelve crucial. Es la versión legible por humanos del bytecode DEX, actuando como un lenguaje ensamblador al traducir el código fuente en instrucciones de bytecode. Smali y baksmali se refieren a las herramientas de ensamblaje y desensamblaje en este contexto.
 
-res/xml/files_paths.xml
+# Intenciones
 
-META-INF/
-
-¡Aquí es donde se encuentra el Certificado!
-
-classes.dex
-
-Contiene bytecode Dalvik, que representa el código Java (o Kotlin) compilado que la aplicación ejecuta por defecto.
-
-lib/
-
-Alberga bibliotecas nativas, segregadas por arquitectura de CPU en subdirectorios.
-
-armeabi: código para procesadores basados en ARM
-
-armeabi-v7a: código para procesadores ARMv7 y superiores
-
-x86: código para procesadores X86
-
-mips: código solo para procesadores MIPS
-
-assets/
-
-Almacena archivos diversos necesarios para la aplicación, que pueden incluir bibliotecas nativas adicionales o archivos DEX, a veces utilizados por autores de malware para ocultar código adicional.
-
-res/
-
-Contiene recursos que no están compilados en resources.arsc
-
-Dalvik y Smali
-En el desarrollo de Android, se utiliza Java o Kotlin para crear aplicaciones. En lugar de usar la JVM como en las aplicaciones de escritorio, Android compila este código en bytecode ejecutable Dalvik (DEX). Anteriormente, la máquina virtual Dalvik manejaba este bytecode, pero ahora, el Android Runtime (ART) se encarga en las versiones más nuevas de Android.
-
-Para la ingeniería inversa, Smali se vuelve crucial. Es la versión legible por humanos del bytecode DEX, actuando como un lenguaje ensamblador al traducir el código fuente en instrucciones de bytecode. Smali y baksmali se refieren a las herramientas de ensamblaje y desensamblaje en este contexto.
-
-Intenciones
 Las intenciones son el medio principal por el cual las aplicaciones Android se comunican entre sus componentes o con otras aplicaciones. Estos objetos de mensaje también pueden transportar datos entre aplicaciones o componentes, similar a cómo se utilizan las solicitudes GET/POST en las comunicaciones HTTP.
 
-Así que una Intención es básicamente un mensaje que se pasa entre componentes. Las Intenciones pueden ser dirigidas a componentes o aplicaciones específicas, o pueden enviarse sin un destinatario específico.
+Así que una Intención es básicamente un **mensaje que se pasa entre componentes**. Las Intenciones **pueden ser dirigidas** a componentes o aplicaciones específicas, o **pueden enviarse sin un destinatario específico**.
 Para ser simple, la Intención se puede usar:
+- Para iniciar una Actividad, típicamente abriendo una interfaz de usuario para una aplicación
+- Como transmisiones para informar al sistema y a las aplicaciones sobre cambios
+- Para iniciar, detener y comunicarse con un servicio en segundo plano
+- Para acceder a datos a través de ContentProviders
+- Como callbacks para manejar eventos
 
-Para iniciar una Actividad, típicamente abriendo una interfaz de usuario para una aplicación
+Si es vulnerable, **las Intenciones pueden ser utilizadas para realizar una variedad de ataques**.
 
-Como transmisiones para informar al sistema y a las aplicaciones sobre cambios
+# Filtro de Intención
 
-Para iniciar, detener y comunicarse con un servicio en segundo plano
-
-Para acceder a datos a través de ContentProviders
-
-Como callbacks para manejar eventos
-
-Si es vulnerable, las Intenciones pueden ser utilizadas para realizar una variedad de ataques.
-
-Filtro de Intención
-Los Filtros de Intención definen cómo una actividad, servicio o Receptor de Transmisión puede interactuar con diferentes tipos de Intenciones. Esencialmente, describen las capacidades de estos componentes, como qué acciones pueden realizar o los tipos de transmisiones que pueden procesar. El lugar principal para declarar estos filtros es dentro del archivo AndroidManifest.xml, aunque para los Receptores de Transmisión, también es una opción codificarlos.
+**Los Filtros de Intención** definen **cómo una actividad, servicio o Receptor de Transmisión puede interactuar con diferentes tipos de Intenciones**. Esencialmente, describen las capacidades de estos componentes, como qué acciones pueden realizar o los tipos de transmisiones que pueden procesar. El lugar principal para declarar estos filtros es dentro del **archivo AndroidManifest.xml**, aunque para los Receptores de Transmisión, también es una opción codificarlos.
 
 Los Filtros de Intención se componen de categorías, acciones y filtros de datos, con la posibilidad de incluir metadatos adicionales. Esta configuración permite que los componentes manejen Intenciones específicas que coincidan con los criterios declarados.
 
-Un aspecto crítico de los componentes de Android (actividades/servicios/proveedores de contenido/receptores de transmisión) es su visibilidad o estado público. Un componente se considera público y puede interactuar con otras aplicaciones si está 
-exportado
- con un valor de 
-true
- o si se declara un Filtro de Intención para él en el manifiesto. Sin embargo, hay una manera para que los desarrolladores mantengan explícitamente estos componentes privados, asegurando que no interactúen con otras aplicaciones de manera no intencionada. Esto se logra configurando el atributo 
-exported
- a 
-false
- en sus definiciones de manifiesto.
+Un aspecto crítico de los componentes de Android (actividades/servicios/proveedores de contenido/receptores de transmisión) es su visibilidad o **estado público**. Un componente se considera público y puede interactuar con otras aplicaciones si está `exportado` con un valor de `true` o si se declara un Filtro de Intención para él en el manifiesto. Sin embargo, hay una manera para que los desarrolladores mantengan explícitamente estos componentes privados, asegurando que no interactúen con otras aplicaciones de manera no intencionada. Esto se logra configurando el atributo `exported` a `false` en sus definiciones de manifiesto.
 
-Además, los desarrolladores tienen la opción de asegurar aún más el acceso a estos componentes al requerir permisos específicos. El atributo 
-permission
- se puede establecer para hacer cumplir que solo las aplicaciones con el permiso designado puedan acceder al componente, agregando una capa adicional de seguridad y control sobre quién puede interactuar con él.
+Además, los desarrolladores tienen la opción de asegurar aún más el acceso a estos componentes al requerir permisos específicos. El atributo `permission` se puede establecer para hacer cumplir que solo las aplicaciones con el permiso designado puedan acceder al componente, agregando una capa adicional de seguridad y control sobre quién puede interactuar con él.
 
 ```html
 <activity android:name=".MyActivity" android:exported="false">
@@ -168,7 +133,8 @@ permission
 </activity>
 ```
 
-Intenciones Implícitas
+# Intenciones Implícitas
+
 Las intenciones se crean programáticamente utilizando un constructor de Intención:
 
 ```python
@@ -192,7 +158,8 @@ Un intent-filter necesita coincidir con la acción, datos y categoría para reci
 
 El proceso de "resolución de Intent" determina qué aplicación debe recibir cada mensaje. Este proceso considera el atributo de prioridad, que se puede establecer en la declaración de intent-filter, y el que tenga la mayor prioridad será seleccionado. Esta prioridad se puede establecer entre -1000 y 1000 y las aplicaciones pueden usar el valor SYSTEM_HIGH_PRIORITY. Si surge un conflicto, aparece una ventana de "elección" para que el usuario pueda decidir.
 
-Intents Explícitos
+# Intents Explícitos
+
 Un intent explícito especifica el nombre de la clase a la que está dirigido:
 
 ```python
@@ -207,10 +174,12 @@ intent.setClassName("com.other.app", "com.other.app.ServiceName");
 context.startService(intent);
 ```
 
-Pending Intents
+# Pending Intents
+
 Estos permiten que otras aplicaciones realicen acciones en nombre de su aplicación, utilizando la identidad y los permisos de su app. Al construir un Pending Intent, se debe especificar un intent y la acción a realizar. Si el intent declarado no es explícito (no declara qué intent puede llamarlo), una aplicación maliciosa podría realizar la acción declarada en nombre de la app víctima. Además, si no se especifica una acción, la app maliciosa podrá hacer cualquier acción en nombre de la víctima.
 
-Broadcast Intents
+# Broadcast Intents
+
 A diferencia de los intents anteriores, que solo son recibidos por una app, los broadcast intents pueden ser recibidos por múltiples apps. Sin embargo, desde la versión de API 14, es posible especificar la app que debería recibir el mensaje usando Intent.setPackage.
 
 Alternativamente, también es posible especificar un permiso al enviar el broadcast. La app receptora necesitará tener ese permiso.
@@ -223,7 +192,8 @@ sendBroadcast
 LocalBroadCastManager
  que asegura que el mensaje nunca salga de la app. Usando esto, ni siquiera necesitará exportar un componente receptor.
 
-Sticky Broadcasts
+# Sticky Broadcasts
+
 Este tipo de Broadcasts pueden ser accedidos mucho después de haber sido enviados.
 Estos fueron desaprobados en el nivel de API 21 y se recomienda no usarlos.
 Permiten que cualquier aplicación intercepte los datos, pero también los modifique.
@@ -278,17 +248,20 @@ onNewIntent
 
 Aprende a llamar enlaces profundos sin usar páginas HTML.
 
-AIDL - Lenguaje de Definición de Interfaces de Android
+# AIDL - Lenguaje de Definición de Interfaces de Android
+
 El Lenguaje de Definición de Interfaces de Android (AIDL) está diseñado para facilitar la comunicación entre el cliente y el servicio en aplicaciones de Android a través de comunicación entre procesos (IPC). Dado que no se permite acceder directamente a la memoria de otro proceso en Android, AIDL simplifica el proceso al marshalling de objetos en un formato entendido por el sistema operativo, facilitando así la comunicación entre diferentes procesos.
 
-Conceptos Clave
+# Conceptos Clave
+
 Servicios Vinculados: Estos servicios utilizan AIDL para IPC, permitiendo que actividades o componentes se vinculen a un servicio, realicen solicitudes y reciban respuestas. El método onBind en la clase del servicio es crítico para iniciar la interacción, marcándolo como un área vital para la revisión de seguridad en busca de vulnerabilidades.
 
 Messenger: Operando como un servicio vinculado, Messenger facilita IPC con un enfoque en el procesamiento de datos a través del método onBind. Es esencial inspeccionar este método de cerca en busca de cualquier manejo de datos inseguro o ejecución de funciones sensibles.
 
 Binder: Aunque el uso directo de la clase Binder es menos común debido a la abstracción de AIDL, es beneficioso entender que Binder actúa como un controlador a nivel de núcleo que facilita la transferencia de datos entre los espacios de memoria de diferentes procesos. Para una comprensión más profunda, hay un recurso disponible en https://www.youtube.com/watch?v=O-UHvFjxwZ8.
 
-Componentes
+# Componentes
+
 Estos incluyen: Actividades, Servicios, Receptores de Difusión y Proveedores.
 
 Actividad de Lanzamiento y otras actividades
