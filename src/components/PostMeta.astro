@@ -11,12 +11,12 @@ const { post } = Astro.props
 <div class="text-textDesc text-sm" data-pagefind-ignore>
   <span class="inline-flex items-center mr1em space-x-1">
     <Icon name="mdi:calendar-month"/>
-    <span>发表于</span>
+    <span>Fecha de Publicación</span>
     <time class="pubDate" datetime={post.data.publishDateISOString}>{post.data.publishDateFormatString}</time>
   </span>
   <span class="inline-flex items-center mr1em space-x-1">
     <Icon name="mdi:calendar-month"/>
-    <span>修改于</span>
+    <span>Última Actualización</span>
     <time class="modifyDate" datetime={post.data.updatedDateISOString}>{post.data.updatedDateFormatString}</time>
   </span>
   <span class="inline-flex items-center mr1em">
@@ -27,7 +27,7 @@ const { post } = Astro.props
   </span>
   <span class="inline-flex items-center mr1em space-x-1">
     <Icon name="mdi:file-document-multiple-outline"/>
-    <span>{post.data.readingTimeWords} 字</span>
+    <span>{post.data.readingTimeWords} palabras</span>
   </span>
   <span class="inline-flex items-center mr1em space-x-1">
     <Icon name="mdi:file-clock-outline"/>

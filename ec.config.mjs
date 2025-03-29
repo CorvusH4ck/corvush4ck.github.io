@@ -4,13 +4,13 @@ import { pluginCollapsibleSections } from '@expressive-code/plugin-collapsible-s
 import { pluginLineNumbers } from '@expressive-code/plugin-line-numbers'
 import { pluginFramesTexts } from '@expressive-code/plugin-frames'
 
-pluginFramesTexts.addLocale('zh-CN',{
+pluginFramesTexts.addLocale('es-ES',{
   copyButtonTooltip: '点击复制',
   copyButtonCopied: '复制成功!'
 })
 
 export default defineEcConfig({
-  defaultLocale: 'zh-CN',
+  defaultLocale: 'es-ES',
   plugins: [ pluginLineNumbers(), pluginCollapsibleSections()],
   themes: ['light-plus','dark-plus'],
   themeCssSelector:() => `.dark`,
