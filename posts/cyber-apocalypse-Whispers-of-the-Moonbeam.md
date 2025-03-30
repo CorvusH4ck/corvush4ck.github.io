@@ -4,11 +4,10 @@ titleIcon: '/htb-logo.png'
 tags: [ 'Command Injection', 'Very Easy' ]
 categories: [ 'CTF', 'HTB', 'Web' ]
 description: |
-  Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.  
-  这里是在 Astro 中编写 Markdown 内容时可以使用的一些基本 Markdown 语法示例。
+  En el corazón de la bulliciosa capital de Valeria, la taberna Rayo de Luna se erige como un animado centro de susurros, apuestas y tratos ilícitos. Bajo las risas de los clientes borrachos y el tintineo de las jarras, se dice que la taberna alberga algo más que cerveza y alegría: es un punto de encuentro secreto para espías, ladrones y leales a la causa de Malakar. La Comunidad se ha enterado de que en las trastiendas ocultas de la Taberna Rayo de Luna se intercambia una información crucial: la ubicación del Cartógrafo Velo de Sombra, un informante que posee un mapa perdido hace mucho tiempo en el que se detallan las defensas de la fortaleza de Malakar. Si la hermandad quiere tener alguna posibilidad de entrar en la Ciudadela de Obsidiana, debe obtener este mapa antes de que caiga en manos enemigas.
 ---
 
-<font size='7'>Whispers of the Moonbeam</font>
+<font size='5'>Whispers of the Moonbeam</font>
 
 Creador del desafío: makelaris
 
