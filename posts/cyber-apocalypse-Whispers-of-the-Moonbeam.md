@@ -13,6 +13,10 @@ Creador del desafío: makelaris
 
 Dificultad: <font color='green'>Muy fácil</font>
 
+# Descripción
+
+En el corazón de la bulliciosa capital de Valeria, la taberna Rayo de Luna se erige como un animado centro de susurros, apuestas y tratos ilícitos. Bajo las risas de los clientes borrachos y el tintineo de las jarras, se dice que la taberna alberga algo más que cerveza y alegría: es un punto de encuentro secreto para espías, ladrones y leales a la causa de Malakar. La Comunidad se ha enterado de que en las trastiendas ocultas de la Taberna Rayo de Luna se intercambia una información crucial: la ubicación del Cartógrafo Velo de Sombra, un informante que posee un mapa perdido hace mucho tiempo en el que se detallan las defensas de la fortaleza de Malakar. Si la hermandad quiere tener alguna posibilidad de entrar en la Ciudadela de Obsidiana, debe obtener este mapa antes de que caiga en manos enemigas.
+
 # Sinopsis
 
 Whispers of the Moonbeam es un reto web de nivel muy fácil. Descubriremos que los comandos en la terminal son instrucciones del sistema, así que ejecutaremos una inyección de comandos y conseguiremos la bandera.
