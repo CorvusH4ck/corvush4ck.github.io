@@ -61,18 +61,18 @@ const NAV_ITEMS = [
       },
     ]
   },
-  {
-    icon: "mdi:account-box",
-    text: "SOBRE MI",
-    href: "/about",
-    children: [
-      {
-        icon: "mdi:account",
-        text: "SOBRE MI",
-        href: "/about"
-      }
-    ]
-  }
+//  {
+//    icon: "mdi:account-box",
+//    text: "SOBRE MI",
+//    href: "/about",
+//    children: [
+//      {
+//        icon: "mdi:account",
+//        text: "SOBRE MI",
+//        href: "/about"
+//      }
+//    ]
+//  }
 ]
 
 const FOOTER = {

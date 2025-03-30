@@ -1,0 +1,55 @@
+---
+title: 'Cyber Apocalypse CTF 2025: Whispers of the Moonbeam'
+titleIcon: '/htb-logo.png'
+tags: [ 'Command Injection', 'Very Easy' ]
+categories: [ 'CTF', 'HTB', 'Web' ]
+description: |
+  Here is a sample of some basic Markdown syntax that can be used when writing Markdown content in Astro.  
+  这里是在 Astro 中编写 Markdown 内容时可以使用的一些基本 Markdown 语法示例。
+---
+
+<font size='7'>Whispers of the Moonbeam</font>
+
+Creador del desafío: makelaris
+
+Dificultad: <font color='green'>Muy fácil</font>
+
+# Sinopsis
+
+Whispers of the Moonbeam es un reto web de nivel muy fácil. Descubriremos que los comandos en la terminal son instrucciones del sistema, así que ejecutaremos una inyección de comandos y conseguiremos la bandera.
+
+## Habilidades requeridas
+
+- Conocimientos de comandos Linux
+
+## Habilidades aprendidas
+
+- Inyección de comandos
+
+# Solución
+
+Cuando visitamos el sitio, nos recibe una aplicación de terminal que acepta comandos.
+
+![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/index.png)
+
+![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/gossip.png)
+
+![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/injection.png)
+
+Tecleando comandos como `gossip`, `observe` y `examine` nos proporcionará aparentemente salidas de comandos de linux, indicando que está ejecutando comandos del sistema. También hay una sugerencia para usar `;` para la inyección de comandos.
+
+![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/gossip.png)
+
+![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/observe.png)
+
+![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/examine.png)
+
+Vemos el `flag.txt` en el comando `gossip`, podemos usar inyección de comando para `cat flag.txt`, usando este payload:
+
+```sh
+observe; cat flag.txt
+```
+
+¡Y conseguimos la bandera!
+
+![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/flag.png)
