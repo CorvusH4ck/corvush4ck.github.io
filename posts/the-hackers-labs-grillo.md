@@ -62,7 +62,7 @@ Ingresamos al sitio mediante el navegador accediendo a la IP descubierta en el e
 
 > "Cambia la contraseña de ssh por favor melanie."
 
-![Página por defecto](/public/thl/principiante/grillo/defaul-page.png)
+![Página por defecto](/thl/principiante/grillo/defaul-page.png)
 
 
 ---
