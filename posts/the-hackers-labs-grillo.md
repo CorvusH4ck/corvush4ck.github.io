@@ -56,15 +56,18 @@ Nmap done: 1 IP address (1 host up) scanned in 12.13 seconds
 
 ---
 
-## Fase 2 - Exploración Web
+## Exploración Web
 
 Ingresamos al sitio mediante el navegador accediendo a la IP descubierta en el escaneo. Nos encontramos con la página por defecto de Apache en Debian. Revisando el código fuente de la página, encontramos una pista interesante:
 
 > "Cambia la contraseña de ssh por favor melanie."
 
+![Página por defecto](/public/thl/principiante/grillo/defaul-page.png)
+
+
 ---
 
-## Fase 3 - Explotación
+## Explotación
 
 Aplicamos fuerza bruta al servicio SSH usando el usuario `melanie` y el diccionario `rockyou.txt`:
 
@@ -76,7 +79,7 @@ Se encuentra la contraseña válida: **trustno1**
 
 ---
 
-## Fase 4 - Escalada de Privilegios
+## Escalada de Privilegios
 
 Una vez dentro de la máquina, verificamos permisos con:
 
