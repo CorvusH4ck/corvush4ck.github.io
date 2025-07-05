@@ -13,6 +13,10 @@ Plataforma: `The Hackers Labs`
 
 Dificultad: <font color='green'>Principiante</font>
 
+🔗 **Página de la máquina:** [https://thehackerslabs.com/grillo/](https://thehackerslabs.com/grillo/)
+
+![Grillo](/thl/principiante/grillo/grillo.png)
+
 # Reconocimiento
 
 En esta etapa inicial realizamos un escaneo de puertos para identificar los servicios activos en la máquina objetivo. Utilizamos `Nmap` con parámetros específicos para lograr un análisis más detallado.
