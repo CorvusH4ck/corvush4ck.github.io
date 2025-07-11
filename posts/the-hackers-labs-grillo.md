@@ -22,7 +22,7 @@ Dificultad: <font color='green'>Principiante</font>
 En esta etapa inicial realizamos un escaneo de puertos para identificar los servicios activos en la máquina objetivo. Utilizamos `Nmap` con parámetros específicos para lograr un análisis más detallado.
 
 ```bash
-sudo nmap -p- --open -sS -sCV --min-rate 3000 -Pn -n -oN grillo.txt 192.168.100.7 
+sudo nmap -p- --open -sS -sCV --min-rate 5000 -Pn -n -oN grillo.txt 192.168.100.7 
 Starting Nmap 7.95 ( https://nmap.org ) at 2025-07-03 19:35 -03
 Nmap scan report for 192.168.100.7
 Host is up (0.00097s latency).
@@ -60,7 +60,7 @@ Nmap done: 1 IP address (1 host up) scanned in 12.13 seconds
 
 ---
 
-## Exploración Web
+# Exploración Web
 
 Ingresamos al sitio mediante el navegador accediendo a la IP descubierta en el escaneo. Nos encontramos con la página por defecto de Apache en Debian. Revisando el código fuente de la página, encontramos una pista interesante:
 
@@ -72,7 +72,7 @@ Ingresamos al sitio mediante el navegador accediendo a la IP descubierta en el e
 
 ---
 
-## Explotación
+# Explotación
 
 Aplicamos fuerza bruta al servicio SSH usando el usuario `melanie` y el diccionario `rockyou.txt`:
 
@@ -86,7 +86,7 @@ Se encuentra la contraseña válida: **trustno1**
 
 ---
 
-## Escalada de Privilegios
+# Escalada de Privilegios
 
 Una vez dentro de la máquina, verificamos permisos con:
 
@@ -119,7 +119,7 @@ Con esto obtenemos acceso completo como root.
 
 ---
 
-## 🎉 ¡Root conseguido!
+# 🎉 ¡Root conseguido!
 
 ![root](/thl/principiante/grillo/root.png)
 
