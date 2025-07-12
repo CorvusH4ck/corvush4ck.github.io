@@ -1,5 +1,5 @@
 ---
-title: 'The Hackers Labs: '
+title: 'The Hackers Labs: Grillo'
 titleIcon: '/thl.png'
 tags: [ 'Linux', 'Fuerza Bruta', 'SSH', 'Puttygen', 'Escalada de Privilegios' ]
 categories: [ 'CTF', 'The Hackers Labs', 'Principiante', 'Linux' ]
@@ -13,7 +13,7 @@ Plataforma: `The Hackers Labs`
 
 Dificultad: <font color='green'>Principiante</font>
 
-🔗 **Página de la máquina:** [https://thehackerslabs.com/grillo/](https://thehackerslabs.com/grillo/)
+🔗 **Página de la máquina:** [https://labs.thehackerslabs.com/machines/43](https://labs.thehackerslabs.com/machines/43)
 
 ![Grillo](/thl/principiante/grillo/grillo.png)
 

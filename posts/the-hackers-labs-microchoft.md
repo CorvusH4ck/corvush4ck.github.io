@@ -1,10 +1,10 @@
 ---
-title: 'The Hackers Labs: '
+title: 'The Hackers Labs: Microchoft'
 titleIcon: '/thl.png'
-tags: [ 'Linux', 'Fuerza Bruta', 'SSH', 'Puttygen', 'Escalada de Privilegios' ]
-categories: [ 'CTF', 'The Hackers Labs', 'Principiante', 'Linux' ]
+tags: [ 'Windows', 'SMB', 'Exploit', 'Eternalblue' ]
+categories: [ 'CTF', 'The Hackers Labs', 'Principiante', 'Windows' ]
 description: |
-  Grillo es una máquina de nivel principiante en The Hackers Labs. A través del reconocimiento inicial y el análisis del servicio web, encontramos una pista útil para continuar. Luego, con algo de fuerza bruta y análisis de privilegios, logramos escalar hasta obtener la flag de root.
+  Microchoft es una máquina de nivel principiante donde nos enfrentamos a un sistema Windows 7 vulnerable. A través de un escaneo SMB descubrimos que es susceptible a EternalBlue. Sin usar Metasploit, logramos explotar la vulnerabilidad manualmente con herramientas externas y obtuvimos acceso como SYSTEM.
 ---
 
 <font size='5'>Grillo</font>
@@ -13,9 +13,9 @@ Plataforma: `The Hackers Labs`
 
 Dificultad: <font color='green'>Principiante</font>
 
-🔗 **Página de la máquina:** [https://thehackerslabs.com/grillo/](https://thehackerslabs.com/grillo/)
+🔗 **Página de la máquina:** [https://labs.thehackerslabs.com/machine/55](https://labs.thehackerslabs.com/machine/55)
 
-![Grillo](/thl/principiante/grillo/grillo.png)
+![Grillo](/thl/principiante/microchoft/microchoft.png)
 
 # Reconocimiento
 
