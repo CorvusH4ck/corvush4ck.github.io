@@ -7,7 +7,7 @@ description: |
   Microchoft es una máquina de nivel principiante donde nos enfrentamos a un sistema Windows 7 vulnerable. A través de un escaneo SMB descubrimos que es susceptible a EternalBlue. Sin usar Metasploit, logramos explotar la vulnerabilidad manualmente con herramientas externas y obtuvimos acceso como SYSTEM.
 ---
 
-<font size='5'>Grillo</font>
+<font size='5'>Microchoft</font>
 
 Plataforma: `The Hackers Labs`
 
