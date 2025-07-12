@@ -13,7 +13,7 @@ Plataforma: `The Hackers Labs`
 
 Dificultad: <font color='green'>Principiante</font>
 
-🔗 **Página de la máquina:** [https://labs.thehackerslabs.com/machine/55](https://labs.thehackerslabs.com/machine/55)
+🔗 **Link de la máquina:** [https://labs.thehackerslabs.com/machine/55](https://labs.thehackerslabs.com/machine/55)
 
 ![Grillo](/thl/principiante/microchoft/microchoft.png)
 
@@ -134,13 +134,7 @@ El escaneo confirma que el sistema **es vulnerable** a ejecución remota de cód
 
 En lugar de utilizar Metasploit, recurrimos a la herramienta **Win7Blue**, una opción externa que permite explotar EternalBlue manualmente.
 
-### 🧰 Herramientas requeridas:
-
-- Nmap
-- Python / Python3
-- Impacket
-- Msfvenom (para generar payload)
-- Netcat
+🔗 **Link de la herramienta:** [https://github.com/d4t4s3c/Win7Blue](https://github.com/d4t4s3c/Win7Blue)
 
 ### 🛠️ Procedimiento:
 

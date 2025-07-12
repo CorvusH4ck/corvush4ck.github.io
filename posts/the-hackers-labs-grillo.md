@@ -13,7 +13,7 @@ Plataforma: `The Hackers Labs`
 
 Dificultad: <font color='green'>Principiante</font>
 
-🔗 **Página de la máquina:** [https://labs.thehackerslabs.com/machines/43](https://labs.thehackerslabs.com/machines/43)
+🔗 **Link de la máquina:** [https://labs.thehackerslabs.com/machines/43](https://labs.thehackerslabs.com/machines/43)
 
 ![Grillo](/thl/principiante/grillo/grillo.png)
 
